@@ -1,0 +1,35 @@
+<h1>Books</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>body</th>
+  </tr>
+   <% @lists.each do |alist| %>
+     <tr>
+      <td><%= alist.title %></td>
+      <td><%= alist.body %></td>
+      <td><%= link_to "Show", list_path(alist.id) %></td>
+     </tr>
+   <% end %>
+
+  
+  
+  
+  
+</table>
+
+
+
+
+
+<!-- form_with部分 -->
+<%= form_with model: @list, url: '/lists', method: :post do |f| %>
+  <h3>New Book</h3>
+  <p>title</p>
+  <%= f.text_field :title %>
+  <p>body</p>
+  <%= f.text_area :body %>
+<br>
+  <%= f.submit 'Create Book' %>
+<% end %>
