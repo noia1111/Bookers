@@ -1,0 +1,48 @@
+<h1>Books</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>body</th>
+  </tr>
+   <% @lists.each do |alist| %>
+     <tr>
+      <td><%= alist.title %></td>
+      <td><%= alist.body %></td>
+      <td><%= link_to "Show", book_path(alist.id) %></td>
+      <td><%= link_to "Edit", edit_book_path(alist.id) %></td>
+      <td><%= link_to "Destroy", book_path(alist.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+     </tr>
+   <% end %>
+
+
+
+
+
+</table>
+
+
+
+
+
+<!-- form_with部分 -->
+<%= form_with model: @list, url: '/books', method: :post do |f| %>
+  <h3>New Book</h3>
+
+  <% if @list.errors.any? %>
+   <%= @list.errors.count %>errors prohibited this book from being saved:
+   <ul>
+     <% @list.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+   　 <% end %>
+   </ul>
+
+  <% end %>
+
+  <p>title</p>
+  <%= f.text_field :title %>
+  <p>body</p>
+  <%= f.text_area :body %>
+<br>
+  <%= f.submit 'Create Book' %>
+<% end %>
